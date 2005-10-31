@@ -1,5 +1,5 @@
 NAME
-    Catalyst::Model::EVDB - EVDB Catalyst model component
+    Catalyst::Model::EVDB - EVDB model class for Catalyst
 
 SYNOPSIS
       # Use the Catalyst helper

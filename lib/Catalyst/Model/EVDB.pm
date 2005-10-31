@@ -5,11 +5,11 @@ use strict;
 use warnings;
 use NEXT;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
-Catalyst::Model::EVDB - EVDB Catalyst model component
+Catalyst::Model::EVDB - EVDB model class for Catalyst
 
 =head1 SYNOPSIS
 

@@ -1,4 +1,7 @@
 Revision history for Perl extension Catalyst::Model::EVDB.
 
+0.02  Sun Oct 30 21:44:45 2005
+        - fix module description
+
 0.01  Tue Oct 22 17:24:32 2005
         - initial revision
