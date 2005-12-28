@@ -1,11 +1,11 @@
 package Catalyst::Model::EVDB;
 
-use base qw/Catalyst::Base EVDB::API/;
 use strict;
 use warnings;
+use base qw/Catalyst::Model EVDB::API/;
 use NEXT;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 NAME
 
@@ -16,7 +16,7 @@ Catalyst::Model::EVDB - EVDB model class for Catalyst
   # Use the Catalyst helper
   script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
 
-  # lib/MyApp/Model/People.pm
+  # lib/MyApp/Model/EVDB.pm
   package MyApp::Model::EVDB;
 
   use base qw/Catalyst::Model::EVDB/;
@@ -33,11 +33,11 @@ Catalyst::Model::EVDB - EVDB model class for Catalyst
   };
 
   # As object method
-  my $events = $c->comp('M::EVDB')->call('events/search', $args)
+  my $results = $c->model('EVDB')->call('events/search', $args)
       or die "Error searching for events: " . $evdb->error;
 
   # As class method
-  my $events = MyApp::Model::EVDB->call('events/search', $args)
+  my $results = MyApp::Model::EVDB->call('events/search', $args)
       or die "Error searching for events: " . $evdb->error;
 
 =head1 DESCRIPTION
@@ -62,6 +62,7 @@ configuration.
 sub new {
     my ($class, $c, $options) = @_;
 
+    # From Catalyst::Model::Gedcom
     return $class->EVDB::API::new(%{ $class->NEXT::new($c, $options) });
 }
 
@@ -80,6 +81,14 @@ sub error {
 =head1 AUTHOR
 
 Daniel Westermann-Clark E<lt>danieltwc@cpan.orgE<gt>
+
+=head1 ACKNOWLEDGEMENTS
+
+=over 4
+
+=item * Brian Cassidy, for clever C<new> code
+
+=back
 
 =head1 LICENSE
 

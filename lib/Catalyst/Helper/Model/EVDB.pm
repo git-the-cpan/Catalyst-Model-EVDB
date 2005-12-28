@@ -1,6 +1,7 @@
 package Catalyst::Helper::Model::EVDB;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -68,6 +69,7 @@ __modelclass__
 package [% class %];
 
 use strict;
+use warnings;
 use base 'Catalyst::Model::EVDB';
 
 __PACKAGE__->config(
