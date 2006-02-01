@@ -1,11 +1,15 @@
 Revision history for Perl extension Catalyst::Model::EVDB.
 
+0.04  Wed Feb  1 17:45:18 EST 2006
+        - Set component configuration in new method
+        - Change error accessor method to errstr to match EVDB::API
+
 0.03  Wed Dec 28 02:33:50 EST 2005
         - Require Catalyst 5.5 (for Catalyst::Model)
         - Add basic test of model class
 
-0.02  Sun Oct 30 21:44:45 2005
+0.02  Sun Oct 30 21:44:45 EST 2005
         - Fix module description
 
-0.01  Tue Oct 22 17:24:32 2005
+0.01  Tue Oct 22 17:24:32 EDT 2005
         - Initial revision

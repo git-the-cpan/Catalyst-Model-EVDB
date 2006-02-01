@@ -2,32 +2,29 @@ NAME
     Catalyst::Model::EVDB - EVDB model class for Catalyst
 
 SYNOPSIS
-      # Use the Catalyst helper
-      script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
+        # Use the Catalyst helper
+        script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
 
-      # lib/MyApp/Model/EVDB.pm
-      package MyApp::Model::EVDB;
+        # lib/MyApp/Model/EVDB.pm
+        package MyApp::Model::EVDB;
 
-      use base qw/Catalyst::Model::EVDB/;
+        use base qw/Catalyst::Model::EVDB/;
 
-      __PACKAGE__->config(
-          app_key => 'xxxxxxxxxxxxxxxx',
-      );
+        __PACKAGE__->config(
+            app_key => 'xxxxxxxxxxxxxxxx',
+        );
 
-      1;
+        1;
 
-      my $args = {
-          location => 'Gainesville, FL',
-          keywords => 'tag:music',
-      };
+        # In your controller
+        my $args = {
+            location => 'Gainesville, FL',
+            keywords => 'tag:music',
+        };
 
-      # As object method
-      my $results = $c->model('EVDB')->call('events/search', $args)
-          or die "Error searching for events: " . $evdb->error;
-
-      # As class method
-      my $results = MyApp::Model::EVDB->call('events/search', $args)
-          or die "Error searching for events: " . $evdb->error;
+        my $evdb    = $c->model('EVDB');
+        my $results = $evdb->call('events/search', $args)
+            or die "Error searching for events: " . $evdb->errstr;
 
 DESCRIPTION
     This is the EVDB::API model class for Catalyst. EVDB::API is a Perl
@@ -40,10 +37,10 @@ DESCRIPTION
 
 METHODS
   new
-    Create a new EVDB API object, using "app_key" as specified in your
+    Create a new EVDB model component, using "app_key" as specified in your
     configuration.
 
-  error
+  errstr
     Return the EVDB API error message.
 
 AUTHOR

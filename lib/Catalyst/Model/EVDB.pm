@@ -5,7 +5,7 @@ use warnings;
 use base qw/Catalyst::Model EVDB::API/;
 use NEXT;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 NAME
 
@@ -13,32 +13,29 @@ Catalyst::Model::EVDB - EVDB model class for Catalyst
 
 =head1 SYNOPSIS
 
-  # Use the Catalyst helper
-  script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
+    # Use the Catalyst helper
+    script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
 
-  # lib/MyApp/Model/EVDB.pm
-  package MyApp::Model::EVDB;
+    # lib/MyApp/Model/EVDB.pm
+    package MyApp::Model::EVDB;
 
-  use base qw/Catalyst::Model::EVDB/;
+    use base qw/Catalyst::Model::EVDB/;
 
-  __PACKAGE__->config(
-      app_key => 'xxxxxxxxxxxxxxxx',
-  );
+    __PACKAGE__->config(
+        app_key => 'xxxxxxxxxxxxxxxx',
+    );
 
-  1;
+    1;
 
-  my $args = {
-      location => 'Gainesville, FL',
-      keywords => 'tag:music',
-  };
+    # In your controller
+    my $args = {
+        location => 'Gainesville, FL',
+        keywords => 'tag:music',
+    };
 
-  # As object method
-  my $results = $c->model('EVDB')->call('events/search', $args)
-      or die "Error searching for events: " . $evdb->error;
-
-  # As class method
-  my $results = MyApp::Model::EVDB->call('events/search', $args)
-      or die "Error searching for events: " . $evdb->error;
+    my $evdb    = $c->model('EVDB');
+    my $results = $evdb->call('events/search', $args)
+        or die "Error searching for events: " . $evdb->errstr;
 
 =head1 DESCRIPTION
 
@@ -54,26 +51,29 @@ L<http://api.evdb.com/>.
 
 =head2 new
 
-Create a new EVDB API object, using C<app_key> as specified in your
-configuration.
+Create a new EVDB model component, using C<app_key> as specified in
+your configuration.
 
 =cut
 
 sub new {
-    my ($class, $c, $options) = @_;
+    my ($class, $c, $config) = @_;
 
     # From Catalyst::Model::Gedcom
-    return $class->EVDB::API::new(%{ $class->NEXT::new($c, $options) });
+    my $self = $class->EVDB::API::new(%{ $class->NEXT::new($c, $config) });
+    $self->config($config);
+
+    return $self;
 }
 
-=head2 error
+=head2 errstr
 
 Return the EVDB API error message.
 
 =cut
 
-sub error {
-    my ($class) = @_;
+sub errstr {
+    my ($self) = @_;
 
     return $EVDB::API::errstr;
 }

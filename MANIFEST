@@ -9,4 +9,5 @@ t/01use.t
 t/02pod.t
 t/03podcoverage.t
 t/04get.t
+t/lib/TestApp.pm
 t/lib/TestApp/Model/EVDB.pm
