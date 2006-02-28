@@ -24,7 +24,7 @@ SYNOPSIS
 
         my $evdb    = $c->model('EVDB');
         my $results = $evdb->call('events/search', $args)
-            or die "Error searching for events: " . $evdb->errstr;
+            or die 'Error searching for events: ' . $evdb->errstr;
 
 DESCRIPTION
     This is the EVDB::API model class for Catalyst. EVDB::API is a Perl

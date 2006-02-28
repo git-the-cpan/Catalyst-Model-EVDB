@@ -5,7 +5,7 @@ use warnings;
 use base qw/Catalyst::Model EVDB::API/;
 use NEXT;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
@@ -35,7 +35,7 @@ Catalyst::Model::EVDB - EVDB model class for Catalyst
 
     my $evdb    = $c->model('EVDB');
     my $results = $evdb->call('events/search', $args)
-        or die "Error searching for events: " . $evdb->errstr;
+        or die 'Error searching for events: ' . $evdb->errstr;
 
 =head1 DESCRIPTION
 

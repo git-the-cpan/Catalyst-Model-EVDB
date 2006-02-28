@@ -9,11 +9,35 @@ Catalyst::Helper::Model::EVDB - Helper for EVDB models
 
 =head1 SYNOPSIS
 
-  script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
+    script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
 
 =head1 DESCRIPTION
 
-Helper for the C<Catalyst> EVDB model.
+Helper for the L<Catalyst> EVDB model.
+
+=head1 USAGE
+
+When creating a new EVDB model class using this helper, you can
+specify much of the configuration and have it filled automatically.
+Using the example from the L</SYNOPSIS> section:
+
+=over
+
+=item * C<EVDB>
+
+The name of the model.  This is also used to determine the filename,
+e.g. C<lib/MyApp/Model/EVDB.pm>.
+
+=item * C<EVDB>
+
+The helper to use, i.e. this one.
+
+=item * C<xxxxxxxxxxxxxxxx>
+
+Your application key, as provided by EVDB.  Please see
+L<http://api.evdb.com/> to obtain an application key.
+
+=back
 
 =head1 METHODS
 
@@ -47,7 +71,15 @@ sub mk_comptest {
 
 =head1 SEE ALSO
 
-L<Catalyst::Manual>, L<Catalyst::Test>, L<Catalyst::Helper>
+=over 4
+
+=item * L<Catalyst::Manual>
+
+=item * L<Catalyst::Test>
+
+=item * L<Catalyst::Helper>
+
+=back
 
 =head1 AUTHOR
 
@@ -62,8 +94,9 @@ it under the same terms as Perl itself.
 
 1;
 
-
 __DATA__
+
+=begin pod_to_ignore
 
 __modelclass__
 package [% class %];
@@ -101,6 +134,9 @@ it under the same terms as Perl itself.
 
 1;
 __modeltest__
+use strict;
+use warnings;
 use Test::More tests => 2;
-use_ok(Catalyst::Test, '[% app %]');
+
+use_ok('Catalyst::Test', '[% app %]');
 use_ok('[% class %]');
