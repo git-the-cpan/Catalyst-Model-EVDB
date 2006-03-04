@@ -1,9 +1,13 @@
+use strict;
+use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME      => 'Catalyst::Model::EVDB',
-    AUTHOR    => 'Daniel Westermann-Clark <danieltwc@cpan.org>',
-    PREREQ_PM => {
+    NAME          => 'Catalyst::Model::EVDB',
+    AUTHOR        => 'Daniel Westermann-Clark <danieltwc@cpan.org>',
+    VERSION_FROM  => 'lib/Catalyst/Model/EVDB.pm',
+    ABSTRACT_FROM => 'lib/Catalyst/Model/EVDB.pm',
+    PREREQ_PM     => {
         'Catalyst'     => '5.5',
         'Data::Dumper' => 0,
         'EVDB::API'    => 0,
@@ -11,7 +15,8 @@ WriteMakefile(
         'NEXT'         => 0,
         'Test::More'   => 0,
     },
-    VERSION_FROM => 'lib/Catalyst/Model/EVDB.pm'
+    dist          => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean         => { FILES => 'Catalyst-Model-EVDB-* MANIFEST META.yml README' },
 );
 
 

@@ -43,17 +43,18 @@ METHODS
   errstr
     Return the EVDB API error message.
 
+SEE ALSO
+    * Catalyst::Helper::Model::EVDB
+    * Catalyst
+    * EVDB::API
+
 AUTHOR
     Daniel Westermann-Clark <danieltwc@cpan.org>
 
-ACKNOWLEDGEMENTS
+ACKNOWLEDGMENTS
     * Brian Cassidy, for clever "new" code
 
 LICENSE
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
-
-SEE ALSO
-    * Catalyst
-    * EVDB::API
 

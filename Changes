@@ -1,5 +1,8 @@
 Revision history for Perl extension Catalyst::Model::EVDB.
 
+0.06  Fri Mar  3 23:43:33 EST 2006
+        - Minor documentation cleanup
+
 0.05  Mon Feb 27 22:47:56 EST 2006
         - Add Helper documentation
         - Instruct POD parsers to ignore helper __DATA__ sections

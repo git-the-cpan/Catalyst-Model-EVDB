@@ -5,7 +5,7 @@ use warnings;
 use base qw/Catalyst::Model EVDB::API/;
 use NEXT;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 NAME
 
@@ -78,11 +78,23 @@ sub errstr {
     return $EVDB::API::errstr;
 }
 
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<Catalyst::Helper::Model::EVDB>
+
+=item * L<Catalyst>
+
+=item * L<EVDB::API>
+
+=back
+
 =head1 AUTHOR
 
 Daniel Westermann-Clark E<lt>danieltwc@cpan.orgE<gt>
 
-=head1 ACKNOWLEDGEMENTS
+=head1 ACKNOWLEDGMENTS
 
 =over 4
 
@@ -94,16 +106,6 @@ Daniel Westermann-Clark E<lt>danieltwc@cpan.orgE<gt>
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
-
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<Catalyst>
-
-=item * L<EVDB::API>
-
-=back
 
 =cut
 
