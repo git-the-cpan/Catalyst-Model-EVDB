@@ -3,9 +3,10 @@ package Catalyst::Model::EVDB;
 use strict;
 use warnings;
 use base qw/Catalyst::Model EVDB::API/;
+use Carp;
 use NEXT;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 =head1 NAME
 
@@ -22,7 +23,11 @@ Catalyst::Model::EVDB - EVDB model class for Catalyst
     use base qw/Catalyst::Model::EVDB/;
 
     __PACKAGE__->config(
-        app_key => 'xxxxxxxxxxxxxxxx',
+        app_key  => 'xxxxxxxxxxxxxxxx',
+
+        # Optional parameters:
+        username => 'danieltwc',
+        password => 'secret',
     );
 
     1;
@@ -76,6 +81,24 @@ sub errstr {
     my ($self) = @_;
 
     return $EVDB::API::errstr;
+}
+
+=head2 login
+
+Login using the username and password specified in the configuration.
+
+=cut
+
+sub login {
+    my ($self) = @_;
+
+    my $username = $self->config->{username} || $self->config->{user};
+    my $password = $self->config->{password};
+    croak 'No authentication information'
+        unless $username and $password;
+
+    croak 'Invalid login'
+        unless $self->NEXT::login(user => $username, password => $password);
 }
 
 =head1 SEE ALSO

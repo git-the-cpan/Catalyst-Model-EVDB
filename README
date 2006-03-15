@@ -11,7 +11,11 @@ SYNOPSIS
         use base qw/Catalyst::Model::EVDB/;
 
         __PACKAGE__->config(
-            app_key => 'xxxxxxxxxxxxxxxx',
+            app_key  => 'xxxxxxxxxxxxxxxx',
+
+            # Optional parameters:
+            username => 'danieltwc',
+            password => 'secret',
         );
 
         1;
@@ -42,6 +46,9 @@ METHODS
 
   errstr
     Return the EVDB API error message.
+
+  login
+    Login using the username and password specified in the configuration.
 
 SEE ALSO
     * Catalyst::Helper::Model::EVDB

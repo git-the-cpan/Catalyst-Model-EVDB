@@ -9,7 +9,7 @@ Catalyst::Helper::Model::EVDB - Helper for EVDB models
 
 =head1 SYNOPSIS
 
-    script/myapp_create.pl model EVDB EVDB xxxxxxxxxxxxxxxx
+    script/myapp_create.pl model EVDB EVDB app_key username password
 
 =head1 DESCRIPTION
 
@@ -32,10 +32,18 @@ e.g. C<lib/MyApp/Model/EVDB.pm>.
 
 The helper to use, i.e. this one.
 
-=item * C<xxxxxxxxxxxxxxxx>
+=item * C<app_key>
 
 Your application key, as provided by EVDB.  Please see
 L<http://api.evdb.com/> to obtain an application key.
+
+=item * C<username>
+
+(Optional) Your EVDB username.
+
+=item * C<password>
+
+(Optional) Your EVDB password.
 
 =back
 
@@ -48,9 +56,11 @@ Makes the EVDB model class.
 =cut
 
 sub mk_compclass {
-    my ($self, $helper, $app_key) = @_;
+    my ($self, $helper, $app_key, $username, $password) = @_;
 
-    $helper->{app_key} = $app_key || '';
+    $helper->{app_key}  = $app_key  || '';
+    $helper->{username} = $username || '';
+    $helper->{password} = $password || '';
 
     $helper->render_file('modelclass', $helper->{file});
 
@@ -106,7 +116,9 @@ use warnings;
 use base 'Catalyst::Model::EVDB';
 
 __PACKAGE__->config(
-    app_key => '[% app_key %]',
+    app_key  => '[% app_key %]',
+    username => '[% username %]',
+    password => '[% password %]',
 );
 
 =head1 NAME

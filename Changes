@@ -1,5 +1,8 @@
 Revision history for Perl extension Catalyst::Model::EVDB.
 
+0.07  Thu Mar 16 01:05:36 EST 2006
+        - Add login method
+
 0.06  Fri Mar  3 23:43:33 EST 2006
         - Minor documentation cleanup
 
