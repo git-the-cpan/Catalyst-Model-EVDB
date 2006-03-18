@@ -22,7 +22,7 @@ sub default : Private {
 
     my $evdb    = $c->model('EVDB');
     my $results = $evdb->call($method, $c->req->params)
-        or die "Error calling $method: " . $evdb->errstr;
+        or die 'Error calling $method: ' . $evdb->errstr;
 
     use Data::Dumper;
     $c->response->content_type('text/plain');
@@ -35,7 +35,7 @@ sub end : Private {
     return 1 if $c->response->status =~ /^3\d\d$/;
     return 1 if $c->response->body;
 
-    $c->res->body("Default body from end");
+    $c->res->body('Default body from end');
 }
 
 1;

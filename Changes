@@ -1,5 +1,11 @@
 Revision history for Perl extension Catalyst::Model::EVDB.
 
+0.08  Sat Mar 18 17:43:05 EST 2006
+        - Allow direct specification of username and password in login
+          method
+        - Add documentation for login method
+        - Reorganize tests
+
 0.07  Thu Mar 16 01:05:36 EST 2006
         - Add login method
 

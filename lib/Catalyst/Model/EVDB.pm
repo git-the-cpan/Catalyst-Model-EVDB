@@ -3,10 +3,9 @@ package Catalyst::Model::EVDB;
 use strict;
 use warnings;
 use base qw/Catalyst::Model EVDB::API/;
-use Carp;
 use NEXT;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 =head1 NAME
 
@@ -23,23 +22,19 @@ Catalyst::Model::EVDB - EVDB model class for Catalyst
     use base qw/Catalyst::Model::EVDB/;
 
     __PACKAGE__->config(
-        app_key  => 'xxxxxxxxxxxxxxxx',
-
-        # Optional parameters:
-        username => 'danieltwc',
-        password => 'secret',
+        app_key => 'xxxxxxxxxxxxxxxx',
     );
 
     1;
 
-    # In your controller
-    my $args = {
+    # In a controller action
+    my %args = (
         location => 'Gainesville, FL',
         keywords => 'tag:music',
-    };
+    );
 
     my $evdb    = $c->model('EVDB');
-    my $results = $evdb->call('events/search', $args)
+    my $results = $evdb->call('events/search', \%args)
         or die 'Error searching for events: ' . $evdb->errstr;
 
 =head1 DESCRIPTION
@@ -85,20 +80,55 @@ sub errstr {
 
 =head2 login
 
-Login using the username and password specified in the configuration.
+Login using the specified username and password.  For example:
+
+    # In a controller action (don't forget validation!)
+    my $username = $c->req->param('username');
+    my $password = $c->req->param('password');
+
+    my $evdb = $c->model('EVDB');
+    $evdb->login(username => $username, password => $password)
+        or die 'Error logging in: ' . $evdb->errstr;
+
+Alternatively, you can set a username and password in the
+configuration for your model class.  They will be used when this
+method is called without arguments.  For example:
+
+    # In your model class
+    __PACKAGE__->config(
+        app_key  => 'xxxxxxxxxxxxxxxx',
+        username => 'danieltwc',
+        password => 'secret',
+    );
+
+    # In a controller action
+    my $evdb = $c->model('EVDB');
+    $evdb->login or die 'Error logging in: ' . $evdb->errstr;
+
+    # Call an EVDB method which requires authentication
+    my %args = (
+        title      => 'Lamb',
+        start_time => '2006-03-18T21:00:00',
+        tags       => 'music',
+        venue_id   => 'V0-001-000160549-4',
+    );
+
+    my $response = $evdb->call('events/new', \%args);
+
+This method also supports passwords which have already been hashed
+using MD5.  Use the C<password_md5> key instead of C<password> when
+calling the method or in your configuration.
 
 =cut
 
 sub login {
-    my ($self) = @_;
+    my ($self, %args) = @_;
 
-    my $username = $self->config->{username} || $self->config->{user};
-    my $password = $self->config->{password};
-    croak 'No authentication information'
-        unless $username and $password;
+    $args{user}         ||= $args{username} || $self->config->{username} || $self->config->{user};
+    $args{password}     ||= $self->config->{password};
+    $args{password_md5} ||= $self->config->{password_md5};
 
-    croak 'Invalid login'
-        unless $self->NEXT::login(user => $username, password => $password);
+    return $self->NEXT::login(%args);
 }
 
 =head1 SEE ALSO
